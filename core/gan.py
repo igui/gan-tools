@@ -76,8 +76,8 @@ class GAN:
         return np.random.uniform(self.noise_params['min'], self.noise_params['max'], shape)
 
     def train_random_batches(self, X, Y=None, batches=1000, batch_size=32, nr_train_discriminator=1,
-                             nr_train_generator=1,
-                             log_interval=1, plot_interval=50, image_shape=None):
+                             nr_train_generator=1, log_interval=1, plot_interval=50, 
+                             image_shape=None, image_destination_prefix=None):
         if batch_size >= X.shape[0]:
             batch_size = X.shape[0]
 
@@ -100,9 +100,12 @@ class GAN:
                     self.d_accs.append(d_accuracy)
                     self.g_accs.append(g_accuracy)
                 if plot_interval != 0 and (i % plot_interval == 0):
-                    vis.show_gan_image_predictions(self, 32, image_shape=image_shape)
+                    if image_destination_prefix != None:
+                        image_destination = f'{image_destination_prefix}-{i:06}.png'
+                    vis.show_gan_image_predictions(self, 32, image_shape=image_shape, destination=image_destination)
 
-    def train(self, X, Y=None, epochs=10, batch_size=32, log_interval=1, plot_interval=50, image_shape=None):
+    def train(self, X, Y=None, epochs=10, batch_size=32, log_interval=1, plot_interval=50, image_shape=None,
+              image_destination_prefix=None):
         if batch_size >= X.shape[0]:
             batch_size = X.shape[0]
 
@@ -135,7 +138,9 @@ class GAN:
                         self.g_accs.append(g_accuracy)
 
                     if plot_interval != 0 and (batches_done % plot_interval == 0):
-                        vis.show_gan_image_predictions(self, 32, image_shape=image_shape)
+                        if image_destination_prefix != None:
+                            image_destination = f'{image_destination_prefix}-{i:06}.png'
+                        vis.show_gan_image_predictions(self, 32, image_shape=image_shape, destination=image_destination)
 
     def train_generator(self, batch_size):
         # Train the generator, 2* batch size to get the same nr as the discriminator
