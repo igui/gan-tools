@@ -2,7 +2,7 @@ import keras
 import numpy as np
 from keras import Input, Model
 from keras.optimizers import Adam
-from tqdm.notebook import trange
+from tqdm import trange
 from keras.layers.merge import _Merge
 import keras.backend as K
 from functools import partial
@@ -102,6 +102,8 @@ class GAN:
                 if plot_interval != 0 and (i % plot_interval == 0):
                     if image_destination_prefix != None:
                         image_destination = f'{image_destination_prefix}-{i:06}.png'
+                    else:
+                        image_destination = None
                     vis.show_gan_image_predictions(self, 32, image_shape=image_shape, destination=image_destination)
 
     def train(self, X, Y=None, epochs=10, batch_size=32, log_interval=1, plot_interval=50, image_shape=None,
