@@ -2,8 +2,7 @@ import keras
 import numpy as np
 from keras import Input, Model
 from keras.optimizers import Adam
-from tqdm.auto import trange
-from tqdm import trange
+from tqdm.notebook import trange
 from keras.layers.merge import _Merge
 import keras.backend as K
 from functools import partial
