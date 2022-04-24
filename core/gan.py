@@ -76,8 +76,8 @@ class GAN:
         return np.random.uniform(self.noise_params['min'], self.noise_params['max'], shape)
 
     def _prog_bar_description(self, iteration, d_loss, d_accuracy, g_loss, g_accuracy):
-        return f"Batch {iteration}, D loss: {d_loss:.4} D acc: {d_accuracy:.4}"\
-               " G loss: {g_loss:.4} G acc: {g_accuracy:.4}"
+        return f"Batch {iteration:6}, D loss: {d_loss:.4} D acc: {d_accuracy:.4} "\
+               f"G loss: {g_loss:.4} G acc: {g_accuracy:.4}"
     
     def train_random_batches(self, X, Y=None, batches=1000, batch_size=32, nr_train_discriminator=1,
                              nr_train_generator=1, log_interval=1, plot_interval=50, 
