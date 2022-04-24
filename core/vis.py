@@ -17,7 +17,7 @@ def show_image_grid(array, columns):
     plt.imshow(grid)
 
 
-def show_gan_image_predictions(gan, nr, columns=8, image_shape=None):
+def show_gan_image_predictions(gan, nr, columns=8, image_shape=None, destination=None):
     images = gan.generate(nr)
     if image_shape is not None:
         if len(image_shape) == 2:
@@ -26,4 +26,7 @@ def show_gan_image_predictions(gan, nr, columns=8, image_shape=None):
     grid = image_grid(images, columns)
     grid = 0.5 * grid + 0.5
     plt.imshow(np.squeeze(grid))
+    plt.axis('off')
+    if destination != None:
+      plt.savefig(destination)
     plt.show()
