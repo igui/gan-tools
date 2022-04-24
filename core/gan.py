@@ -95,7 +95,7 @@ class GAN:
                                                 np.mean, batch_size=batch_size)
 
                 if log_interval != 0 and (i % log_interval == 0):
-                    prog_bar.set_description(_prog_bar_description(i+1, d_loss, d_accuracy, g_loss, g_accuracy))
+                    prog_bar.set_description(self._prog_bar_description(i+1, d_loss, d_accuracy, g_loss, g_accuracy))
                     self.d_losses.append(d_loss)
                     self.g_losses.append(g_loss)
                     self.d_accs.append(d_accuracy)
@@ -129,7 +129,7 @@ class GAN:
 
                     batches_done = batches_done + 1
                     if log_interval != 0 and (batches_done % log_interval == 0):
-                        prog_bar.set_description(_prog_bar_description(i+1, d_loss, d_accuracy, g_loss, g_accuracy))
+                        prog_bar.set_description(self._prog_bar_description(i+1, d_loss, d_accuracy, g_loss, g_accuracy))
                         self.d_losses.append(d_loss)
                         self.g_losses.append(g_loss)
                         self.d_accs.append(d_accuracy)
